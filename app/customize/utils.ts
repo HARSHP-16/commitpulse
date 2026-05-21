@@ -1,6 +1,7 @@
 import type { ExportFormat } from './types';
 
-const BADGE_BASE_URL = 'https://commitpulse.vercel.app/api/streak';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://commitpulse.vercel.app';
+const BADGE_BASE_URL = `${siteUrl}/api/streak`;
 
 export function stripHash(val: string): string {
   return val.replace(/^#/, '');

@@ -7,8 +7,10 @@ import type { Metadata } from 'next';
 
 const inter = Inter({ subsets: ['latin'] });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://commitpulse.vercel.app';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://commitpulse.vercel.app'),
+  metadataBase: new URL(siteUrl),
   title: 'CommitPulse | 3D Isometric GitHub Contribution Graph',
   description:
     'Transform your GitHub contribution history into a cinematic, 3D isometric SVG monolith. Drop it into your README and visualize your developer rhythm with real-time accuracy.',
@@ -24,17 +26,20 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Sourav Jha', url: 'https://github.com/JhaSourav07' }],
   creator: 'Sourav Jha',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://commitpulse.vercel.app/',
+    url: siteUrl,
     title: 'CommitPulse | 3D Isometric GitHub Contribution Graph',
     description:
       'Generate a cinematic, isometric 3D SVG of your GitHub contributions for your README. Stop being boring and visualize your grind.',
     siteName: 'CommitPulse',
     images: [
       {
-        url: 'https://commitpulse.vercel.app/api/streak?user=jhasourav07&theme=neon',
+        url: `${siteUrl}/api/streak?user=jhasourav07&theme=neon`,
         width: 1200,
         height: 630,
         alt: 'CommitPulse 3D GitHub Contribution Graph Preview',
@@ -46,7 +51,7 @@ export const metadata: Metadata = {
     title: 'CommitPulse | Elevate Your GitHub README',
     description:
       'Generate a cinematic, isometric 3D SVG of your GitHub contributions for your README.',
-    images: ['https://commitpulse.vercel.app/api/streak?user=jhasourav07&theme=neon'],
+    images: [`${siteUrl}/api/streak?user=jhasourav07&theme=neon`],
     // creator: '@your_twitter_handle', // Uncomment and add your Twitter handle here
   },
   robots: {

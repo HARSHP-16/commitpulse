@@ -9,9 +9,13 @@ export const metadata: Metadata = {
   title: 'Documentation | CommitPulse',
   description:
     'Complete guide to embedding and customizing your CommitPulse streak badge. API parameters, themes, and examples.',
+  alternates: {
+    canonical: '/documentation',
+  },
 };
 
-const API_BASE_URL = 'https://commitpulse.vercel.app/api/streak';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://commitpulse.vercel.app';
+const API_BASE_URL = `${siteUrl}/api/streak`;
 const USERNAME_PLACEHOLDER = 'YOUR_USERNAME';
 
 const buildSnippet = (query = '') =>

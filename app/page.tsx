@@ -86,8 +86,33 @@ export default function LandingPage() {
   const trimmedUsername = username.trim();
   const hasUsername = trimmedUsername.length > 0;
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://commitpulse.vercel.app';
   const badgeUrl = `/api/streak?user=${trimmedUsername}`;
-  const markdown = `![CommitPulse](https://commitpulse.vercel.app/api/streak?user=${trimmedUsername})`;
+  const markdown = `![CommitPulse](${siteUrl}/api/streak?user=${trimmedUsername})`;
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${siteUrl}/#website`,
+        url: siteUrl,
+        name: 'CommitPulse',
+        description: '3D Isometric GitHub Contribution Graph generator',
+      },
+      {
+        '@type': 'WebApplication',
+        '@id': `${siteUrl}/#webapplication`,
+        url: siteUrl,
+        name: 'CommitPulse',
+        applicationCategory: 'DeveloperApplication',
+        operatingSystem: 'All',
+        browserRequirements: 'Requires JavaScript. Requires HTML5.',
+        description:
+          'Transform your GitHub contribution history into a cinematic, 3D isometric SVG monolith. Drop it into your README and visualize your developer rhythm with real-time accuracy.',
+      },
+    ],
+  };
 
   const copyToClipboard = () => {
     if (!hasUsername) return;
@@ -104,6 +129,10 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-transparent font-sans text-white selection:bg-white/20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div className="absolute -left-[10%] -top-[10%] h-[40%] w-[40%] rounded-full bg-white/3 blur-[120px]" />
         <div className="absolute -right-[10%] top-[20%] h-[30%] w-[30%] rounded-full bg-white/2 blur-[120px]" />
